@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncFocus - 共に集中するタイマー</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <header>
+        <div class="logo">SyncFocus</div>
+        <div class="user-status"><span class="pulse"></span>オンライン: 124人</div>
+    </header>
+
+    <main class="container">
+        <!-- 左側：自分のタイマー -->
+        <section class="glass-panel timer-section">
+            <h1>今のあなたの目標は？</h1>
+            <p class="subtitle">1人で頑張らない。みんなと一緒なら続く。</p>
+
+            <div class="setup-container" id="setup-container">
+                <input type="text" id="task-input" placeholder="例: 30分間プログラミング学習" autocomplete="off">
+                <div class="time-selector">
+                    <button class="time-btn active" data-time="15">15分</button>
+                    <button class="time-btn" data-time="25">25分</button>
+                    <button class="time-btn" data-time="45">45分</button>
+                    <button class="time-btn" data-time="60">60分</button>
+                </div>
+                <button id="start-btn" class="primary-btn">集中をスタートする</button>
+            </div>
+
+            <div class="active-timer-container hidden" id="active-timer-container">
+                <h2 id="current-task-display">タスク名</h2>
+                <div class="timer-display" id="timer-display">25:00</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <button id="stop-btn" class="secondary-btn">やめる</button>
+            </div>
+        </section>
+
+        <!-- 右側：みんなのフィード -->
+        <section class="glass-panel feed-section">
+            <div class="feed-header">
+                <h2>みんなの集中フィード</h2>
+                <span class="live-badge">LIVE</span>
+            </div>
+            <div class="feed-list" id="feed-list">
+                <!-- フィードアイテムがJSで追加されます -->
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

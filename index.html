@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncFocus v2 - 共に集中するタイマー</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
+</head>
+<body>
+    <div class="ambient-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <span class="material-symbols-rounded logo-icon">graphic_eq</span>
+            SyncFocus <span class="badge">v2</span>
+        </div>
+        <div class="header-right">
+            <button id="ambient-sound-btn" class="icon-btn" title="環境音ON/OFF">
+                <span class="material-symbols-rounded">headphones</span>
+            </button>
+            <div class="user-status">
+                <span class="pulse"></span>オンライン: <span id="online-count">124</span>人
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 左側：自分のタイマー -->
+        <div class="left-column">
+            <section class="glass-panel timer-section">
+                <div class="panel-header">
+                    <h1>今のあなたの目標は？</h1>
+                    <p class="subtitle">1人で頑張らない。みんなと一緒なら続く。</p>
+                </div>
+
+                <div class="setup-container" id="setup-container">
+                    <div class="input-group">
+                        <span class="material-symbols-rounded input-icon">task_alt</span>
+                        <input type="text" id="task-input" placeholder="例: 30分間プログラミング学習" autocomplete="off">
+                    </div>
+                    
+                    <div class="mode-selector">
+                        <div class="mode-label">タイマーモード</div>
+                        <div class="toggle-group">
+                            <button class="toggle-btn active" data-mode="pomodoro">ポモドーロ (25分+5分)</button>
+                            <button class="toggle-btn" data-mode="custom">カスタム</button>
+                        </div>
+                    </div>
+
+                    <div class="custom-time-selector hidden" id="custom-time-selector">
+                        <button class="time-btn" data-time="15">15分</button>
+                        <button class="time-btn" data-time="30">30分</button>
+                        <button class="time-btn" data-time="45">45分</button>
+                        <button class="time-btn" data-time="60">60分</button>
+                    </div>
+
+                    <button id="start-btn" class="primary-btn glow-effect">
+                        <span class="material-symbols-rounded">play_arrow</span>
+                        集中をスタートする
+                    </button>
+                </div>
+
+                <div class="active-timer-container hidden" id="active-timer-container">
+                    <div class="timer-mode-badge" id="timer-mode-badge">FOCUS MODE</div>
+                    <h2 id="current-task-display" class="task-title">タスク名</h2>
+                    
+                    <div class="timer-circle">
+                        <svg class="progress-ring" width="200" height="200">
+                            <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent" r="90" cx="100" cy="100"/>
+                            <circle class="progress-ring__circle" id="timer-ring" stroke="url(#gradient)" stroke-width="8" fill="transparent" r="90" cx="100" cy="100"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#8b5cf6" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="timer-display" id="timer-display">25:00</div>
+                    </div>
+
+                    <div class="controls">
+                        <button id="stop-btn" class="secondary-btn">
+                            <span class="material-symbols-rounded">stop</span>
+                            やめる
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 達成記録セクション -->
+            <section class="glass-panel stats-section">
+                <div class="stats-header">
+                    <span class="material-symbols-rounded">emoji_events</span>
+                    <h3>今日の達成記録</h3>
+                </div>
+                <div class="stats-content">
+                    <div class="stat-box">
+                        <div class="stat-value" id="today-focus-time">0<span class="unit">分</span></div>
+                        <div class="stat-label">合計集中時間</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="today-tasks-completed">0<span class="unit">個</span></div>
+                        <div class="stat-label">完了タスク</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 右側：みんなのフィード -->
+        <section class="glass-panel feed-section">
+            <div class="feed-header">
+                <h2>みんなの集中フィード</h2>
+                <span class="live-badge"><span class="pulse-small"></span>LIVE</span>
+            </div>
+            <div class="feed-list" id="feed-list">
+                <!-- フィードアイテムがJSで追加されます -->
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
